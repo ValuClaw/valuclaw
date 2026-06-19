@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ValuClaw/valuclaw/blob/main/schemas/context-manifest.schema.json",
+  "title": "ContextManifest",
+  "description": "What entered a meaningful model call, and why. Inspectable by user and admin. Memory is just a form of context and appears here explicitly.",
+  "type": "object",
+  "required": ["model", "skill", "data_classes"],
+  "additionalProperties": false,
+  "properties": {
+    "model": {
+      "type": "object",
+      "required": ["id", "routing_reason"],
+      "properties": {
+        "id": { "type": "string" },
+        "routing_reason": { "type": "string" },
+        "deployment": { "type": "string", "enum": ["frontier", "private", "fast", "local"] }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "memory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "scope"],
+        "properties": {
+          "id": { "type": "string" },
+          "scope": { "type": "string" }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "provider", "as_of"],
+        "properties": {
+          "id": { "type": "string" },
+          "provider": { "type": "string" },
+          "as_of": { "type": "string", "format": "date-time" },
+          "citation": { "type": "string" }
+        }
+      }
+    },
+    "tools": { "type": "array", "items": { "type": "string" } },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "data_class": { "type": "string" },
+        "model_allowlist": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "data_classes": { "type": "array", "items": { "type": "string" } },
+    "workflow_state": { "type": "object" },
+    "excluded": {
+      "type": "array",
+      "description": "Context deliberately excluded, when exclusion is material.",
+      "items": {
+        "type": "object",
+        "required": ["id", "reason"],
+        "properties": {
+          "id": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}

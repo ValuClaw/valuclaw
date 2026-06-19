@@ -25,7 +25,13 @@ This repo is the open, inspectable substrate. Apache-2.0.
 - [`specs/audit-event.md`](specs/audit-event.md) — append-only record of tool calls, retrievals, model calls, approvals, and artifacts.
 - [`specs/data-provider-contract.md`](specs/data-provider-contract.md) — entitlement-aware data access with source lineage.
 
-A reference harness, example skills, and connector examples will land here as they stabilise.
+Concrete examples and schemas:
+
+- [`schemas/context-manifest.schema.json`](schemas/context-manifest.schema.json) — JSON Schema for the context manifest.
+- [`skills/weekly-update/SKILL.md`](skills/weekly-update/SKILL.md) — an example versioned skill.
+- [`examples/weekly-update-run.md`](examples/weekly-update-run.md) — a synthetic end-to-end run (manifest → tools → audit → output).
+
+A reference harness and connector examples will land here as they stabilise.
 
 ## For Microsoft 365 administrators and security teams
 
