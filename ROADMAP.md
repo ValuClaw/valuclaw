@@ -52,6 +52,54 @@ A **thin, inspectable harness** for capital-markets work — think of a minimal 
 - [x] Second skill: model audit / workbook checks
 - [x] Eval harness: citation coverage = 100%; blocks when the workbook is excluded
 
+## Next primitives — not yet done
+
+These are direction, not dates. They should be pulled only when they strengthen the public demo or a design-partner workflow.
+
+## v0.5 — Demo-grade workflow surface
+
+- [ ] Export the synthetic weekly-update run as a browser-demo state machine
+- [ ] Show model choice, skill version, selected context, approved data, memory, output, sources, approvals, and history
+- [ ] Keep all data synthetic/public and avoid live customer/vendor access
+- [ ] Make the demo useful to a skeptical capital-markets professional, not just a developer inspecting architecture
+
+## v0.6 — Microsoft identity + surface bridge
+
+- [ ] Document Microsoft Entra app registration and narrow delegated-scope ladder
+- [ ] Add a local Microsoft Graph adapter interface with mocked tests only
+- [ ] Add Office/Outlook/Teams/email/CLI command envelopes that dispatch into the same headless core
+- [ ] Record every Microsoft read and pending write/send/save as audit events
+- [ ] Provide an admin packet: permission matrix, data-flow sketch, deployment notes, audit examples
+
+## v0.7 — Data readiness
+
+- [ ] Harden the data-provider contract as runtime validation, not only docs
+- [ ] Add OpenBB-compatible response normalization into source refs and audit events
+- [ ] Add local REST / MCP provider adapter shape for customer-approved data services
+- [ ] Require entitlement, allowed-use, caching, retention, redistribution, as-of, and citation metadata
+- [ ] Keep tests on synthetic/public data; do not commit licensed vendor data or credentials
+
+## v0.8 — Memory + skills governance
+
+- [ ] Add memory candidate review: approve / reject / edit before persistence
+- [ ] Add memory scopes by user, team, workflow, and project
+- [ ] Add export/delete/update APIs and tests proving excluded memory is excluded
+- [ ] Add skill version pinning, migration notes, and compatibility checks
+
+## v0.9 — Office artifact hardening
+
+- [ ] Expand typed document commands across Word, Excel, and PowerPoint
+- [ ] Add diff/revert flows for generated edits
+- [ ] Validate formulas, citations, links, and source lineage before artifact approval
+- [ ] Bind outputs to synthetic templates that mimic firm-style artifacts without using real customer templates
+
+## v1.0 candidate — First design-partner wedge
+
+- [ ] Choose segment x artifact x surface x data path from discovery
+- [ ] Build the narrowest real workflow with customer-approved data and permissions
+- [ ] Generalize the reusable skill / connector / document command back into the open source
+- [ ] Keep customer data, credentials, and licensed vendor material out of the repo
+
 ## Principles
 
 - Synthetic data in the repo; never customer data or licensed vendor code.

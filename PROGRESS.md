@@ -4,7 +4,7 @@ A running log for the build loop. Keep it short and current. See [`AGENTS.md`](A
 
 ## Current milestone
 
-Roadmap complete through v0.4.
+Roadmap complete through v0.4. Next work is primitive-led: demo surface, Microsoft identity/surface bridge, data readiness, memory/skills governance, Office artifact hardening, and the first design-partner wedge.
 
 ## Done
 
@@ -41,8 +41,11 @@ Roadmap complete through v0.4.
 
 ## Next
 
-- Keep hardening the open core with real design-partner workflows, but do not add real customer data or licensed vendor data.
+- Build a demo-grade browser workflow that exposes the synthetic run as model/context/data/memory/output/history choices.
 - Human-verify the Office add-in sideload flow in Word dev mode.
+- Add a mocked Microsoft Graph/Entra adapter interface and admin packet before touching live Microsoft accounts.
+- Harden provider-contract runtime validation and add OpenBB-compatible response normalization using synthetic/public data only.
+- Keep hardening the open core with real design-partner workflows, but do not add real customer data or licensed vendor data.
 
 ## Decisions / notes
 
@@ -53,6 +56,8 @@ Roadmap complete through v0.4.
 - Added `packages/docs-engine` with `xlsx`, `docx`, `pptxgenjs`, and `jszip`; tests inspect generated Office package XML rather than using real customer files.
 - The add-in is a dev/synthetic sideload surface. Runtime verification inside Word requires a human Office desktop/web dev environment; no Microsoft credentials are committed or required.
 - EDGAR provider tests use a mocked fetcher. The package is public-data only and does not fetch or commit live filings in tests.
+- Microsoft 365 surfaces beyond local Office.js proof require Microsoft account authentication, Microsoft Entra app registration, narrow delegated scopes, and likely admin consent as usage expands. Do not add broad Graph access before a workflow earns it.
+- OpenBB/ODP is a compatibility target and integration pattern, not a public dependency. Keep AGPL/commercial-license boundaries explicit if any OpenBB code is ever embedded or distributed.
 
 ## Blocked / needs a human
 
