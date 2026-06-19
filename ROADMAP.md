@@ -1,6 +1,6 @@
 # Roadmap
 
-ValuClaw's open core is early. This is **direction, not dates** — and everything in the repo uses synthetic data until a design partner names a real workflow.
+ValuClaw's open core is early. This is **direction, not dates** — and everything in the repo uses synthetic data until a design partner names a real workflow. The build contract for an AI coding agent is in [`AGENTS.md`](AGENTS.md); running notes in [`PROGRESS.md`](PROGRESS.md).
 
 ## The shape we're building toward
 
@@ -13,16 +13,44 @@ A **thin, inspectable harness** for capital-markets work — think of a minimal 
 
 ## Done (v0)
 
-- [Specs](specs/): context manifest, skill spec, audit event, data-provider contract.
-- A [JSON Schema](schemas/context-manifest.schema.json) for the context manifest.
-- An [example skill](skills/weekly-update/SKILL.md) and a [synthetic end-to-end run](examples/weekly-update-run.md).
+- [x] [Specs](specs/): context manifest, skill spec, audit event, data-provider contract
+- [x] A [JSON Schema](schemas/context-manifest.schema.json) for the context manifest
+- [x] An [example skill](skills/weekly-update/SKILL.md) and a [synthetic end-to-end run](examples/weekly-update-run.md)
 
-## Next
+## v0.1 — Thin harness + tools (`core` + `cli`)
 
-- **Thin harness + tools (v0.1).** Load a skill, assemble a context manifest, call a model through a **provider-agnostic adapter (local or hosted)**, run tool calls (web search, local filesystem, data retrieval via the data-provider contract, artifact ops), emit audit events, enforce a human-approval gate, and keep transparent memory separate from skills. Runnable headless (CLI + library).
-- **Office document tools (v0.2).** Read an Excel workbook into compact structure and write/edit Word, Excel, and PowerPoint — with cell-level lineage.
-- **Office add-in — the native surface (v0.3).** A task-pane add-in (one app first) that drives the harness from inside Office: pick model / skill / context, generate or edit the artifact in place, and see history. This is how users actually meet ValuClaw.
-- **First data provider + history (v0.4).** A public-filings (SEC/EDGAR) provider implementing the data-provider contract, a searchable run-history store, and a second skill with a small eval harness.
+- [ ] Skill loader (reads the skill spec / `SKILL.md`)
+- [ ] Context-manifest assembly, validated against the JSON schema
+- [ ] Provider-agnostic model adapter: deterministic **mock** + local (OpenAI-compatible / Ollama)
+- [ ] Inspectable tool registry: web search, local filesystem, data retrieval (data-provider contract), artifact ops
+- [ ] Append-only audit-event log
+- [ ] Human-approval gate before any send / save / external action
+- [ ] Transparent memory store: read / edit / export, kept separate from skills
+- [ ] `valuclaw run weekly-update --input <synthetic fixture>` → artifact + manifest + audit log
+- [ ] Blocks model commentary when the workbook is excluded (per the example run)
+- [ ] Unit + integration tests green
+
+## v0.2 — Office document tools (`docs-engine`)
+
+- [ ] Read `.xlsx` into compact structure
+- [ ] Generate/edit `.docx` from templates (then `.xlsx`, `.pptx`)
+- [ ] Cell-level lineage carried into outputs
+- [ ] Round-trip tests on synthetic files
+
+## v0.3 — Office add-in: the native surface (`office-addin`)
+
+- [ ] Office.js task-pane add-in + `manifest.xml` (one host first: Excel or Word)
+- [ ] Drives the harness: pick model / skill / context
+- [ ] Generate or edit the artifact in place
+- [ ] View history; approval gate and lineage visible in the pane
+- [ ] Sideloads in Office dev mode; weekly-update flow end-to-end on synthetic data
+
+## v0.4 — Provider + history + second skill + evals
+
+- [ ] SEC/EDGAR public-filings provider implementing the data-provider contract (public data only)
+- [ ] Searchable run-history store
+- [ ] Second skill: model audit / workbook checks
+- [ ] Eval harness: citation coverage = 100%; blocks when the workbook is excluded
 
 ## Principles
 
