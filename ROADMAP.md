@@ -59,8 +59,8 @@ A **thin, inspectable harness** for capital-markets work — think of a minimal 
 - Inspection-first: context manifests, audit events, and human approval from the first runnable version.
 - Apache-2.0. Small and sharp beats broad and shallow.
 
-## What stays commercial
+## How this is funded
 
-The production, admin-deployable Microsoft 365 add-in; managed hosting; premium firm-specific skills and connectors; support; and security/compliance packaging. The open core is the substrate; the business is building it into your workflow and running it.
+Everything in this repo is open-source (Apache-2.0) — there is **no proprietary or premium tier**. The business is **services on top of open code**: implementation (building it into your workflow), managed hosting (we run it for you), support, and training. You can always self-host and own the result.
 
 → [valuclaw.com](https://www.valuclaw.com)

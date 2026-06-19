@@ -35,11 +35,11 @@ A reference harness and connector examples will land here as they stabilise — 
 
 ## For Microsoft 365 administrators and security teams
 
-The point of an open core is that you can read it: narrow delegated scopes, explicit context manifests, immutable audit events, human approval before consequential actions, and no training on your data. Apache-2.0 includes an explicit patent grant.
+The point of open source is that you can read it: narrow delegated scopes, explicit context manifests, immutable audit events, human approval before consequential actions, and no training on your data. Apache-2.0 includes an explicit patent grant.
 
 ## Work with us
 
-The open core is free. We make a living implementing it — mapping one real workflow, building it with your team on these rails, and leaving you owning a source-backed Office workflow you can inspect and host.
+It's all open-source and free to run yourself. We make a living on **services** — implementing it: mapping one real workflow, building it with your team on these rails, and leaving you owning a source-backed Office workflow you can inspect, host, and keep. No proprietary tier.
 
 → [valuclaw.com](https://www.valuclaw.com)
 

@@ -20,4 +20,4 @@ v0.1 — Thin harness + tools (not started)
 
 ## Blocked / needs a human
 
-- _(anything requiring real Microsoft/Graph credentials, licensed vendor access, an Office Store submission, or a change to the open/premium boundary or a spec's intent)_
+- _(anything requiring real Microsoft/Graph credentials, licensed vendor access, an Office Store submission, or a change to a spec's intent or ROADMAP scope)_

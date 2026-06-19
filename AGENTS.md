@@ -27,7 +27,7 @@ See [`ROADMAP.md`](ROADMAP.md) for the per-milestone checklist and exit criteria
 - **Synthetic data only** in the repo. Never use, fetch, or commit real customer data or **licensed** vendor data/code. EDGAR (public) is allowed; Bloomberg/FactSet/CapIQ/etc. are not.
 - **Model- and provider-agnostic; no lock-in.** Never hardcode one model/provider. Memory and history are transparent, editable, and exportable. Memory is separate from skills.
 - **Inspection-first.** Every model call emits a context manifest; every consequential step emits an audit event; a human approval gate precedes any send / save / file overwrite / external action — from the first runnable version.
-- **Open/premium boundary.** This repo is the open core. Build a *reference/example* add-in only; do **not** build the production admin-deployable Microsoft 365 add-in, managed hosting, a control plane, or premium/firm-specific connectors here.
+- **Everything is open-source (Apache-2.0).** There is no proprietary or premium tier — do not add closed components. The business model is services (implementation, managed hosting, support), not closed code. Build the Office add-in for real (not a throwaway), as far as synthetic data and dev sideloading allow.
 - No secrets committed. Apache-2.0 headers where appropriate. No fake customers, metrics, or vendor partnerships.
 
 ## Loop protocol
@@ -42,7 +42,7 @@ See [`ROADMAP.md`](ROADMAP.md) for the per-milestone checklist and exit criteria
 
 ## Stop and ask a human when
 
-you need real Microsoft tenant / Graph credentials, any licensed vendor access, a production Office Store submission, or a decision that changes the open/premium boundary or a spec's intent. Do **not** fake or stub these as if real — leave a clearly-marked synthetic/dev path and flag it in `PROGRESS.md`.
+you need real Microsoft tenant / Graph credentials, any licensed vendor access, a production Office Store submission, or a decision that changes a spec's intent or the scope in `ROADMAP.md`. Do **not** fake or stub these as if real — leave a clearly-marked synthetic/dev path and flag it in `PROGRESS.md`.
 
 ## Definition of done (overall)
 
