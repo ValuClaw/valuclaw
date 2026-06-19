@@ -33,6 +33,67 @@ Concrete examples and schemas:
 
 A reference harness and connector examples will land here as they stabilise — see [`ROADMAP.md`](ROADMAP.md) for direction.
 
+## Try the v0.1 harness
+
+Requires Node >=20 and pnpm.
+
+```bash
+pnpm install
+pnpm build
+pnpm test
+pnpm valuclaw run weekly-update --input fixtures/weekly-update/input.json --out .valuclaw/runs/weekly-update
+```
+
+The synthetic run writes:
+
+- `.valuclaw/runs/weekly-update/context-manifest.json`
+- `.valuclaw/runs/weekly-update/artifact.md`
+- `.valuclaw/runs/weekly-update/audit.ndjson`
+- `.valuclaw/runs/weekly-update/memory-export.json`
+- `.valuclaw/history.json`
+
+To verify the inspection gate blocks model commentary when workbook context is excluded:
+
+```bash
+pnpm valuclaw run weekly-update --input fixtures/weekly-update/input.json --out .valuclaw/runs/blocked --exclude-workbook
+```
+
+## Office document tools
+
+`packages/docs-engine` is the synthetic document layer:
+
+- reads `.xlsx` into compact sheet/cell structures with lineage refs;
+- writes `.docx` memo sections from templates with source lists;
+- writes `.xlsx` review workbooks with a `ValuClaw_Lineage` sheet;
+- writes `.pptx` summaries with lineage notes.
+
+The package is intentionally fixture-driven until a design partner names a real workflow.
+
+## Providers, history, and evals
+
+- `packages/providers` includes a public-data SEC/EDGAR provider that implements the data-provider contract shape. Tests use a mocked fetcher; no live filings are committed.
+- `packages/core` includes a JSON run-history store with append, search, and export.
+- `skills/model-audit/SKILL.md` is the second example skill.
+- `packages/evals` checks the synthetic weekly-update workflow for citation coverage and blocking when the workbook is excluded.
+
+## Office add-in dev surface
+
+`packages/office-addin` contains the first Word task-pane surface:
+
+- `manifest.xml` for Office dev sideloading;
+- `public/taskpane.html` and `src/taskpane.ts` for the task pane;
+- synthetic controls for model, skill, and workbook context;
+- visible approval state, lineage, and preserved run history;
+- insertion into Word through `Office.context.document.setSelectedDataAsync` when Office.js is available.
+
+Build it with:
+
+```bash
+pnpm --filter @valuclaw/office-addin build
+```
+
+Then serve `packages/office-addin/dist` at `https://localhost:3100` and sideload `packages/office-addin/manifest.xml` in Word dev mode. Runtime sideload verification requires a local Office desktop/web dev environment.
+
 ## For Microsoft 365 administrators and security teams
 
 The point of open source is that you can read it: narrow delegated scopes, explicit context manifests, immutable audit events, human approval before consequential actions, and no training on your data. Apache-2.0 includes an explicit patent grant.

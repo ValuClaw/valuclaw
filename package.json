@@ -1,0 +1,19 @@
+{
+  "name": "valuclaw",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "tsc -b --pretty false",
+    "test": "vitest run",
+    "valuclaw": "node packages/cli/dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

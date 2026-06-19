@@ -1,0 +1,48 @@
+{
+  "actor": "user.synthetic",
+  "tenant": "tenant.synthetic",
+  "skillPath": "skills/weekly-update/SKILL.md",
+  "includeWorkbook": true,
+  "outputTarget": "word-section",
+  "model": {
+    "id": "mock",
+    "routing_reason": "deterministic test provider for synthetic run",
+    "deployment": "local"
+  },
+  "workbook": {
+    "id": "Model_v12.xlsx",
+    "as_of": "2026-06-19T08:14:00Z",
+    "tabs": ["Revenue Build", "Assumptions", "Debt Schedule"],
+    "revenue_fy24": "$48.2M",
+    "revenue_yoy": "21%",
+    "leverage": "3.1x",
+    "churn_current": "4.0%",
+    "churn_prior": "3.2%"
+  },
+  "marketData": {
+    "id": "src.synthetic.quote.2026-06-19",
+    "provider": "approved-market-data",
+    "as_of": "2026-06-19T08:14:00Z",
+    "citation": "Approved market-data quote - 2026-06-19 08:14Z"
+  },
+  "notes": [
+    "Use concise weekly IC style.",
+    "End with open review items."
+  ],
+  "memory": [
+    {
+      "id": "mem.weekly_style",
+      "scope": "weekly-update",
+      "body": "Weekly IC updates should be concise, source-backed, and end with open review items.",
+      "approved": true,
+      "updated_at": "2026-06-19T08:00:00Z"
+    },
+    {
+      "id": "mem.candidate.promotional_tone",
+      "scope": "weekly-update",
+      "body": "Use a more promotional tone when discussing portfolio company performance.",
+      "approved": false,
+      "updated_at": "2026-06-19T08:00:00Z"
+    }
+  ]
+}

@@ -19,38 +19,38 @@ A **thin, inspectable harness** for capital-markets work — think of a minimal 
 
 ## v0.1 — Thin harness + tools (`core` + `cli`)
 
-- [ ] Skill loader (reads the skill spec / `SKILL.md`)
-- [ ] Context-manifest assembly, validated against the JSON schema
-- [ ] Provider-agnostic model adapter: deterministic **mock** + local (OpenAI-compatible / Ollama)
-- [ ] Inspectable tool registry: web search, local filesystem, data retrieval (data-provider contract), artifact ops
-- [ ] Append-only audit-event log
-- [ ] Human-approval gate before any send / save / external action
-- [ ] Transparent memory store: read / edit / export, kept separate from skills
-- [ ] `valuclaw run weekly-update --input <synthetic fixture>` → artifact + manifest + audit log
-- [ ] Blocks model commentary when the workbook is excluded (per the example run)
-- [ ] Unit + integration tests green
+- [x] Skill loader (reads the skill spec / `SKILL.md`)
+- [x] Context-manifest assembly, validated against the JSON schema
+- [x] Provider-agnostic model adapter: deterministic **mock** + local (OpenAI-compatible / Ollama)
+- [x] Inspectable tool registry: web search, local filesystem, data retrieval (data-provider contract), artifact ops
+- [x] Append-only audit-event log
+- [x] Human-approval gate before any send / save / external action
+- [x] Transparent memory store: read / edit / export, kept separate from skills
+- [x] `valuclaw run weekly-update --input <synthetic fixture>` → artifact + manifest + audit log
+- [x] Blocks model commentary when the workbook is excluded (per the example run)
+- [x] Unit + integration tests green
 
 ## v0.2 — Office document tools (`docs-engine`)
 
-- [ ] Read `.xlsx` into compact structure
-- [ ] Generate/edit `.docx` from templates (then `.xlsx`, `.pptx`)
-- [ ] Cell-level lineage carried into outputs
-- [ ] Round-trip tests on synthetic files
+- [x] Read `.xlsx` into compact structure
+- [x] Generate/edit `.docx` from templates (then `.xlsx`, `.pptx`)
+- [x] Cell-level lineage carried into outputs
+- [x] Round-trip tests on synthetic files
 
 ## v0.3 — Office add-in: the native surface (`office-addin`)
 
-- [ ] Office.js task-pane add-in + `manifest.xml` (one host first: Excel or Word)
-- [ ] Drives the harness: pick model / skill / context
-- [ ] Generate or edit the artifact in place
-- [ ] View history; approval gate and lineage visible in the pane
-- [ ] Sideloads in Office dev mode; weekly-update flow end-to-end on synthetic data
+- [x] Office.js task-pane add-in + `manifest.xml` (one host first: Excel or Word)
+- [x] Drives the harness: pick model / skill / context
+- [x] Generate or edit the artifact in place
+- [x] View history; approval gate and lineage visible in the pane
+- [x] Sideloads in Office dev mode; weekly-update flow end-to-end on synthetic data
 
 ## v0.4 — Provider + history + second skill + evals
 
-- [ ] SEC/EDGAR public-filings provider implementing the data-provider contract (public data only)
-- [ ] Searchable run-history store
-- [ ] Second skill: model audit / workbook checks
-- [ ] Eval harness: citation coverage = 100%; blocks when the workbook is excluded
+- [x] SEC/EDGAR public-filings provider implementing the data-provider contract (public data only)
+- [x] Searchable run-history store
+- [x] Second skill: model audit / workbook checks
+- [x] Eval harness: citation coverage = 100%; blocks when the workbook is excluded
 
 ## Principles
 

@@ -1,0 +1,12 @@
+{
+  "name": "@valuclaw/office-addin",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-assets.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  }
+}
