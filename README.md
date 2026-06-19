@@ -31,7 +31,7 @@ Concrete examples and schemas:
 - [`skills/weekly-update/SKILL.md`](skills/weekly-update/SKILL.md) — an example versioned skill.
 - [`examples/weekly-update-run.md`](examples/weekly-update-run.md) — a synthetic end-to-end run (manifest → tools → audit → output).
 
-A reference harness and connector examples will land here as they stabilise.
+A reference harness and connector examples will land here as they stabilise — see [`ROADMAP.md`](ROADMAP.md) for direction.
 
 ## For Microsoft 365 administrators and security teams
 
