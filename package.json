@@ -9,11 +9,16 @@
     "build": "pnpm -r build",
     "demo:payload": "node packages/cli/dist/index.js demo weekly-update --input fixtures/weekly-update/input.json --out artifacts/demo/weekly-update-demo.json",
     "lint": "tsc -b --pretty false",
+    "office:cert": "office-addin-dev-certs install",
+    "office:doctor": "node scripts/customer-doctor.mjs",
+    "office:serve": "pnpm build && node scripts/office-local-bridge.mjs",
+    "office:sideload:word": "node scripts/sideload-word.mjs",
     "test": "vitest run",
     "valuclaw": "node packages/cli/dist/index.js"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "office-addin-dev-certs": "^2.0.9",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }

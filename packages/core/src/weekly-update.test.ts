@@ -46,6 +46,27 @@ describe("v0.1 weekly update harness", () => {
     expect(result.manifest.sources?.some((source) => source.provider === "workbook")).toBe(false);
   });
 
+  it("records the customer-selected model in the context manifest", async () => {
+    const result = await runWeeklyUpdate({
+      inputPath: fixturePath,
+      model: {
+        id: "qwen3:4b-instruct",
+        routing_reason: "Customer-selected local model.",
+        deployment: "local"
+      },
+      provider: {
+        id: "local:qwen3:4b-instruct",
+        complete: async () => "A source-backed local-model draft."
+      }
+    });
+    expect(result.manifest.model).toEqual({
+      id: "qwen3:4b-instruct",
+      routing_reason: "Customer-selected local model.",
+      deployment: "local"
+    });
+    expect(result.auditEvents.find((event) => event.type === "model_call")?.model?.id).toBe("qwen3:4b-instruct");
+  });
+
   it("keeps transparent memory editable and exportable outside skills", async () => {
     const path = join(await mkdtemp(join(tmpdir(), "valuclaw-memory-")), "memory.json");
     const store = new JsonMemoryStore(path);

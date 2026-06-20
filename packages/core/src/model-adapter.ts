@@ -39,6 +39,7 @@ export class LocalOpenAICompatibleProvider implements ModelProvider {
       baseUrl: string;
       model: string;
       apiKey?: string;
+      maxTokens?: number;
     }
   ) {
     this.id = `local:${options.model}`;
@@ -53,6 +54,7 @@ export class LocalOpenAICompatibleProvider implements ModelProvider {
       },
       body: JSON.stringify({
         model: this.options.model,
+        max_tokens: this.options.maxTokens ?? 240,
         messages: [
           {
             role: "system",

@@ -33,7 +33,7 @@ Concrete examples and schemas:
 
 A reference harness and connector examples will land here as they stabilise — see [`ROADMAP.md`](ROADMAP.md) for direction.
 
-## Try the v0.1 harness
+## Try the local proof
 
 Requires Node >=20 and pnpm.
 
@@ -51,6 +51,8 @@ The synthetic run writes:
 - `.valuclaw/runs/weekly-update/audit.ndjson`
 - `.valuclaw/runs/weekly-update/memory-export.json`
 - `.valuclaw/history.json`
+
+For the actual Word proof on a single Mac, follow [`docs/local-customer-setup.md`](docs/local-customer-setup.md). It starts an HTTPS localhost bridge, runs the same harness, inserts the reviewed draft into Word, and leaves manifests, audit events, and run history on the machine.
 
 To verify the inspection gate blocks model commentary when workbook context is excluded:
 
@@ -87,23 +89,26 @@ pnpm demo:payload
 
 This writes `artifacts/demo/weekly-update-demo.json`, including workflow mapping, context and permission preview, policy checks, entitlement ledger, Office artifact preview, redlines, verification checks, approvals, and run history. It is synthetic-only and safe to copy into the website repo.
 
-## Office add-in dev surface
+## Word add-in local proof
 
 `packages/office-addin` contains the first Word task-pane surface:
 
 - `manifest.xml` for Office dev sideloading;
 - `public/taskpane.html` and `src/taskpane.ts` for the task pane;
-- synthetic controls for model, skill, and workbook context;
+- a local HTTPS bridge into the same harness used by the CLI;
+- explicit controls for deterministic synthetic mode or a configured OpenAI-compatible local model;
 - visible approval state, lineage, and preserved run history;
 - insertion into Word through `Office.context.document.setSelectedDataAsync` when Office.js is available.
 
-Build it with:
+Set it up on macOS with Word installed:
 
 ```bash
-pnpm --filter @valuclaw/office-addin build
+pnpm office:cert
+pnpm office:sideload:word
+pnpm office:serve
 ```
 
-Then serve `packages/office-addin/dist` at `https://localhost:3100` and sideload `packages/office-addin/manifest.xml` in Word dev mode. Runtime sideload verification requires a local Office desktop/web dev environment.
+Then restart Word, open a document, and choose **Home > Add-ins > ValuClaw**. This local proof uses synthetic data only by default. For a local model, set `VALUCLAW_MODEL` and `VALUCLAW_MODEL_BASE_URL` before starting the bridge; the pane displays the selected model endpoint. See [`docs/local-customer-setup.md`](docs/local-customer-setup.md) for the exact data boundary and rollout limits.
 
 ## For Microsoft 365 administrators and security teams
 

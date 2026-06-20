@@ -3,7 +3,7 @@ import { execFile } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { promisify } from "node:util";
-import { readWeeklyUpdateInput, runWeeklyUpdate, weeklyUpdateDemoPayload } from "@valuclaw/core";
+import { LocalOpenAICompatibleProvider, readWeeklyUpdateInput, runWeeklyUpdate, weeklyUpdateDemoPayload } from "@valuclaw/core";
 
 const execFileAsync = promisify(execFile);
 
@@ -11,6 +11,11 @@ interface Args {
   input?: string;
   out?: string;
   history?: string;
+  provider?: "mock" | "openai-compatible";
+  baseUrl?: string;
+  model?: string;
+  apiKeyEnv?: string;
+  maxTokens?: number;
   excludeWorkbook: boolean;
 }
 
@@ -39,12 +44,14 @@ async function runWeeklyUpdateCommand(rest: string[]) {
   }
   const outDir = resolve(args.out ?? ".valuclaw/runs/weekly-update");
   const historyPath = resolve(args.history ?? ".valuclaw/history.json");
+  const local = localProviderFromArgs(args);
   await mkdir(outDir, { recursive: true });
   const result = await runWeeklyUpdate({
     inputPath: resolve(args.input),
     outDir,
     historyPath,
-    excludeWorkbook: args.excludeWorkbook
+    excludeWorkbook: args.excludeWorkbook,
+    ...local
   });
   process.stdout.write(
     [
@@ -83,7 +90,7 @@ async function writeWeeklyUpdateDemoCommand(rest: string[]) {
 }
 
 function parseArgs(args: string[]): Args {
-  const parsed: Args = { excludeWorkbook: false };
+  const parsed: Args = { excludeWorkbook: false, provider: "mock" };
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
     if (arg === "--input") {
@@ -92,6 +99,20 @@ function parseArgs(args: string[]): Args {
       parsed.out = args[++i];
     } else if (arg === "--history") {
       parsed.history = args[++i];
+    } else if (arg === "--provider") {
+      const provider = args[++i];
+      if (provider !== "mock" && provider !== "openai-compatible") {
+        throw new Error("--provider must be mock or openai-compatible");
+      }
+      parsed.provider = provider;
+    } else if (arg === "--base-url") {
+      parsed.baseUrl = args[++i];
+    } else if (arg === "--model") {
+      parsed.model = args[++i];
+    } else if (arg === "--api-key-env") {
+      parsed.apiKeyEnv = args[++i];
+    } else if (arg === "--max-tokens") {
+      parsed.maxTokens = parsePositiveInteger(args[++i], "--max-tokens");
     } else if (arg === "--exclude-workbook") {
       parsed.excludeWorkbook = true;
     } else {
@@ -101,11 +122,51 @@ function parseArgs(args: string[]): Args {
   return parsed;
 }
 
+function localProviderFromArgs(args: Args) {
+  if (args.provider !== "openai-compatible") {
+    return {};
+  }
+  const model = args.model ?? process.env.VALUCLAW_MODEL;
+  if (!model) {
+    throw new Error("--model <id> or VALUCLAW_MODEL is required for --provider openai-compatible");
+  }
+  const baseUrl = args.baseUrl ?? process.env.VALUCLAW_MODEL_BASE_URL ?? "http://127.0.0.1:11434/v1";
+  const apiKeyEnv = args.apiKeyEnv ?? "VALUCLAW_MODEL_API_KEY";
+  const maxTokens = args.maxTokens ?? environmentPositiveInteger("VALUCLAW_MODEL_MAX_TOKENS");
+  return {
+    provider: new LocalOpenAICompatibleProvider({
+      baseUrl,
+      model,
+      apiKey: process.env[apiKeyEnv],
+      maxTokens
+    }),
+    model: {
+      id: model,
+      routing_reason: "Customer-selected OpenAI-compatible model endpoint.",
+      deployment: "local" as const
+    }
+  };
+}
+
+function parsePositiveInteger(value: string | undefined, option: string): number {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new Error(`${option} must be a positive integer`);
+  }
+  return parsed;
+}
+
+function environmentPositiveInteger(name: string): number | undefined {
+  const value = process.env[name];
+  return value ? parsePositiveInteger(value, name) : undefined;
+}
+
 function usage() {
   process.stdout.write(
     [
       "Usage:",
       "  valuclaw run weekly-update --input <synthetic fixture> [--out <dir>] [--history <file>] [--exclude-workbook]",
+      "    [--provider mock|openai-compatible] [--base-url <url>] [--model <id>] [--api-key-env <environment variable>] [--max-tokens <n>]",
       "  valuclaw demo weekly-update --input <synthetic fixture> [--out <file>] [--exclude-workbook]",
       ""
     ].join("\n")

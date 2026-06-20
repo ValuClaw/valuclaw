@@ -1,26 +1,55 @@
-import { createSyntheticRun } from "./synthetic-run.js";
 import { getOffice } from "./office-shim.js";
+
+interface WeeklyUpdateResponse {
+  blocked: boolean;
+  artifactHtml: string;
+  artifactText: string;
+  lineage: string[];
+  approval: string;
+  historyEntry: string;
+  model: string;
+  dataDestination: string;
+}
 
 function init() {
   const generate = mustGet<HTMLButtonElement>("generate");
-  generate.addEventListener("click", () => {
-    const model = mustGet<HTMLSelectElement>("model").value === "local" ? "local" : "mock";
-    const includeWorkbook = mustGet<HTMLInputElement>("include-workbook").checked;
-    const run = createSyntheticRun({
-      model,
-      skill: "skill.weekly_update@0.1.0",
-      includeWorkbook
-    });
-    mustGet("artifact").textContent = run.artifactText;
-    mustGet("lineage").textContent = run.lineage.length ? run.lineage.join(" | ") : "No lineage because the draft is blocked.";
-    mustGet("approval").textContent = run.approval;
-    mustGet("status").textContent = run.blocked ? "blocked" : "ready for review";
-    const history = mustGet("history");
-    history.innerHTML = `<div>${run.historyEntry}</div>${history.innerHTML === "No preserved runs yet." ? "" : history.innerHTML}`;
-    if (!run.blocked) {
-      insertIntoOffice(run.artifactHtml);
+  generate.addEventListener("click", async () => {
+    generate.disabled = true;
+    mustGet("status").textContent = "running";
+    mustGet("approval").textContent = "Assembling only the context you selected...";
+    try {
+      const response = await fetch("/api/runs/weekly-update", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          provider: mustGet<HTMLSelectElement>("model").value,
+          includeWorkbook: mustGet<HTMLInputElement>("include-workbook").checked
+        })
+      });
+      const payload = (await response.json()) as WeeklyUpdateResponse | { error?: string };
+      if (!response.ok || !("artifactText" in payload)) {
+        throw new Error("error" in payload ? payload.error : "The local ValuClaw service did not return a run.");
+      }
+      renderRun(payload);
+    } catch (error) {
+      mustGet("status").textContent = "needs attention";
+      mustGet("approval").textContent = error instanceof Error ? error.message : String(error);
+    } finally {
+      generate.disabled = false;
     }
   });
+}
+
+function renderRun(run: WeeklyUpdateResponse) {
+  mustGet("artifact").textContent = run.artifactText;
+  mustGet("lineage").textContent = run.lineage.length ? run.lineage.join(" | ") : "No lineage because the draft is blocked.";
+  mustGet("approval").textContent = `${run.approval} Model path: ${run.model}. Context destination: ${run.dataDestination}.`;
+  mustGet("status").textContent = run.blocked ? "blocked" : "ready for review";
+  const history = mustGet("history");
+  history.innerHTML = `<div>${run.historyEntry}</div>${history.innerHTML === "No preserved runs yet." ? "" : history.innerHTML}`;
+  if (!run.blocked) {
+    insertIntoOffice(run.artifactHtml);
+  }
 }
 
 function insertIntoOffice(html: string) {

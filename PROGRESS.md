@@ -28,8 +28,8 @@ Roadmap complete through v0.5. Open-core exports a synthetic weekly-update paylo
   - round-trip tests on synthetic files.
 - v0.3 — Office add-in native surface:
   - Word task-pane `manifest.xml`;
-  - static Office.js task pane with model / skill / workbook context controls;
-  - synthetic weekly-update generation;
+  - Office.js task pane backed by the same local harness as the CLI;
+  - HTTPS localhost bridge with deterministic synthetic and explicit OpenAI-compatible local-model paths;
   - Word insertion path via `Office.context.document.setSelectedDataAsync`;
   - visible lineage, approval state, and preserved history;
   - build copies task-pane assets into `dist`.
@@ -59,7 +59,7 @@ Roadmap complete through v0.5. Open-core exports a synthetic weekly-update paylo
 - The local model adapter targets OpenAI-compatible `/chat/completions`; tests use deterministic mock only.
 - Tool registry includes inspectable v0.1 tools; web search is a synthetic placeholder until a public/permitted provider is added.
 - Added `packages/docs-engine` with `xlsx`, `docx`, `pptxgenjs`, and `jszip`; tests inspect generated Office package XML rather than using real customer files.
-- The add-in is a dev/synthetic sideload surface. Runtime verification inside Word requires a human Office desktop/web dev environment; no Microsoft credentials are committed or required.
+- The add-in is a dev/synthetic sideload surface. `pnpm office:cert`, `pnpm office:sideload:word`, and `pnpm office:serve` provide the local Mac path. Runtime verification inside Word still requires a human Office desktop/web environment; no Microsoft credentials are committed or required.
 - EDGAR provider tests use a mocked fetcher. The package is public-data only and does not fetch or commit live filings in tests.
 - Microsoft 365 surfaces beyond local Office.js proof require Microsoft account authentication, Microsoft Entra app registration, narrow delegated scopes, and likely admin consent as usage expands. Do not add broad Graph access before a workflow earns it.
 - OpenBB/ODP is a compatibility target and integration pattern, not a public dependency. Keep AGPL/commercial-license boundaries explicit if any OpenBB code is ever embedded or distributed.

@@ -7,13 +7,14 @@ import { assembleWeeklyUpdateManifest } from "./manifest.js";
 import { artifactFromModelText, MockModelProvider, type ModelProvider } from "./model-adapter.js";
 import { loadSkill } from "./skill-loader.js";
 import { createDefaultToolRegistry } from "./tool-registry.js";
-import type { Artifact, WeeklyUpdateInput, WeeklyUpdateRunResult } from "./types.js";
+import type { Artifact, ModelRef, WeeklyUpdateInput, WeeklyUpdateRunResult } from "./types.js";
 
 export interface WeeklyUpdateRunOptions {
   inputPath: string;
   outDir?: string;
   historyPath?: string;
   provider?: ModelProvider;
+  model?: ModelRef;
   excludeWorkbook?: boolean;
 }
 
@@ -23,6 +24,9 @@ export async function readWeeklyUpdateInput(path: string): Promise<WeeklyUpdateI
 
 export async function runWeeklyUpdate(options: WeeklyUpdateRunOptions): Promise<WeeklyUpdateRunResult> {
   const input = await readWeeklyUpdateInput(options.inputPath);
+  if (options.model) {
+    input.model = options.model;
+  }
   if (options.excludeWorkbook) {
     input.includeWorkbook = false;
   }
