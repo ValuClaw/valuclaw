@@ -70,6 +70,8 @@ These are direction, not dates. They should be pulled only when they strengthen 
 - [ ] Add Office/Outlook/Teams/email/CLI command envelopes that dispatch into the same headless core
 - [ ] Record every Microsoft read and pending write/send/save as audit events
 - [ ] Provide an admin packet: permission matrix, data-flow sketch, deployment notes, audit examples
+- [ ] Provide deployment templates/notes for local self-host, managed hosting, customer Azure, and Office add-in rollout
+- [ ] Document manifest versioning and re-consent triggers for permission/scope/event changes
 
 ## v0.7 — Data readiness
 
