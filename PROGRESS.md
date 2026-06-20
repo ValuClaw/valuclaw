@@ -4,7 +4,7 @@ A running log for the build loop. Keep it short and current. See [`AGENTS.md`](A
 
 ## Current milestone
 
-Roadmap complete through v0.4. Next work is primitive-led: demo surface, Microsoft identity/surface bridge, data readiness, memory/skills governance, Office artifact hardening, and the first design-partner wedge.
+Roadmap complete through v0.5. Open-core exports a synthetic weekly-update payload for the website demo, with customer-readiness primitives surfaced explicitly.
 
 ## Done
 
@@ -38,10 +38,15 @@ Roadmap complete through v0.4. Next work is primitive-led: demo surface, Microso
   - searchable JSON run-history store in `core`;
   - `skills/model-audit/SKILL.md` example skill;
   - `packages/evals` weekly-update eval harness for citation coverage and excluded-workbook blocking.
+- v0.5 — generated website-demo payload:
+  - `packages/core/src/demo-payload.ts` builds a synthetic customer-demo packet from the weekly-update run;
+  - payload includes workflow map, context/permission preview, policy checks, entitlement ledger, artifact preview, redlines, verification, approvals, and run history;
+  - `pnpm demo:payload` writes `artifacts/demo/weekly-update-demo.json`;
+  - tests cover synthetic-only guardrails, rejected memory exclusion, excluded-workbook blocking, citation/source coverage, and entitlement metadata.
 
 ## Next
 
-- Build a demo-grade browser workflow that exposes the synthetic run as model/context/data/memory/output/history choices.
+- Keep the website demo and generated open-core payload in sync.
 - Human-verify the Office add-in sideload flow in Word dev mode.
 - Add a mocked Microsoft Graph/Entra adapter interface and admin packet before touching live Microsoft accounts.
 - Harden provider-contract runtime validation and add OpenBB-compatible response normalization using synthetic/public data only.

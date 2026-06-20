@@ -139,3 +139,88 @@ export interface RunHistoryEntry {
   manifest: ContextManifest;
   audit_event_ids: string[];
 }
+
+export interface DemoStatusItem {
+  id: string;
+  label: string;
+  status: "pass" | "review" | "blocked" | "pending";
+  detail: string;
+}
+
+export interface DemoPayload {
+  schema_version: "0.1.0";
+  generated_by: "ValuClaw open-core";
+  fixture_id: string;
+  synthetic_only: true;
+  open_core_commit: string;
+  workflow: {
+    id: string;
+    title: string;
+    persona: string;
+    artifact: string;
+    reviewer: string;
+    approval_path: string;
+    steps: DemoStatusItem[];
+  };
+  context_preview: {
+    model: ModelRef;
+    skill: SkillRef;
+    selected_context: DemoStatusItem[];
+    excluded_context: DemoStatusItem[];
+    approved_memory: MemoryRef[];
+    rejected_memory: MemoryRecord[];
+  };
+  permission_preview: {
+    will_read: DemoStatusItem[];
+    will_not_touch: DemoStatusItem[];
+    external_actions: DemoStatusItem[];
+  };
+  policy_checks: DemoStatusItem[];
+  entitlement_ledger: Array<{
+    source_id: string;
+    source_label: string;
+    provider: string;
+    as_of: string;
+    may_retrieve: boolean;
+    may_quote: boolean;
+    may_summarize: boolean;
+    may_cache: boolean;
+    may_redistribute: boolean;
+    may_enter_model_context: boolean;
+    detail: string;
+  }>;
+  artifact_preview: {
+    target: WeeklyUpdateInput["outputTarget"];
+    title: string;
+    blocked: boolean;
+    sections: Array<{
+      id: string;
+      heading: string;
+      body: string;
+      source_ids: string[];
+    }>;
+    citations: SourceRef[];
+    review_flags: string[];
+  };
+  redlines: Array<{
+    id: string;
+    label: string;
+    before: string;
+    after: string;
+    action: "accept" | "reject" | "undo";
+    status: "proposed" | "accepted" | "rejected";
+  }>;
+  verification_checks: DemoStatusItem[];
+  approvals: DemoStatusItem[];
+  run_history: {
+    id: string;
+    ts: string;
+    model: ModelRef;
+    skill: SkillRef;
+    sources: SourceRef[];
+    approved_memory_ids: string[];
+    audit_event_ids: string[];
+    approval_status: "pending" | "approved" | "rejected";
+    searchable_terms: string[];
+  };
+}

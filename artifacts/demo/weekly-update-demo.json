@@ -1,0 +1,388 @@
+{
+  "schema_version": "0.1.0",
+  "generated_by": "ValuClaw open-core",
+  "fixture_id": "fixtures/weekly-update/input.json",
+  "synthetic_only": true,
+  "open_core_commit": "b35e98b-dirty",
+  "workflow": {
+    "id": "workflow.weekly_investment_update",
+    "title": "Weekly investment update",
+    "persona": "Investment professional preparing a reviewer-ready update",
+    "artifact": "Word section for the weekly IC pack",
+    "reviewer": "Senior reviewer",
+    "approval_path": "Draft only until reviewer approves send/save",
+    "steps": [
+      {
+        "id": "map",
+        "label": "Workflow mapped",
+        "status": "pass",
+        "detail": "Inputs, output, reviewer, and approval path are explicit."
+      },
+      {
+        "id": "context",
+        "label": "Context selected",
+        "status": "pass",
+        "detail": "Workbook, approved data, skill, and approved memory selected."
+      },
+      {
+        "id": "draft",
+        "label": "Office draft prepared",
+        "status": "review",
+        "detail": "Draft is ready for review with source chips attached."
+      },
+      {
+        "id": "approval",
+        "label": "External action gated",
+        "status": "pending",
+        "detail": "No Outlook send or shared-location save until approval."
+      }
+    ]
+  },
+  "context_preview": {
+    "model": {
+      "id": "mock",
+      "routing_reason": "deterministic test provider for synthetic run",
+      "deployment": "local"
+    },
+    "skill": {
+      "id": "skill.weekly_update",
+      "version": "0.1.0"
+    },
+    "selected_context": [
+      {
+        "id": "skill",
+        "label": "Skill skill.weekly_update v0.1.0",
+        "status": "pass",
+        "detail": "Versioned procedure included in the model call."
+      },
+      {
+        "id": "workbook",
+        "label": "Model_v12.xlsx",
+        "status": "pass",
+        "detail": "Revenue Build, Assumptions, Debt Schedule included as traceable context."
+      },
+      {
+        "id": "market-data",
+        "label": "Approved market-data quote",
+        "status": "pass",
+        "detail": "Included as a customer-approved source ref."
+      },
+      {
+        "id": "memory",
+        "label": "Approved memory",
+        "status": "pass",
+        "detail": "1 approved memory item included."
+      }
+    ],
+    "excluded_context": [
+      {
+        "id": "mem.candidate.promotional_tone",
+        "label": "mem.candidate.promotional_tone",
+        "status": "review",
+        "detail": "Candidate memory is visible but excluded until approved."
+      }
+    ],
+    "approved_memory": [
+      {
+        "id": "mem.weekly_style",
+        "scope": "weekly-update",
+        "body": "Weekly IC updates should be concise, source-backed, and end with open review items."
+      }
+    ],
+    "rejected_memory": [
+      {
+        "id": "mem.candidate.promotional_tone",
+        "scope": "weekly-update",
+        "body": "Use a more promotional tone when discussing portfolio company performance.",
+        "approved": false,
+        "updated_at": "2026-06-19T08:00:00Z"
+      }
+    ]
+  },
+  "permission_preview": {
+    "will_read": [
+      {
+        "id": "read-workbook",
+        "label": "Model_v12.xlsx",
+        "status": "pass",
+        "detail": "Selected workbook tabs only."
+      },
+      {
+        "id": "read-market-data",
+        "label": "Approved data source",
+        "status": "pass",
+        "detail": "Synthetic customer-approved source ref only."
+      },
+      {
+        "id": "read-memory",
+        "label": "Approved memory",
+        "status": "pass",
+        "detail": "Only approved memory IDs enter context."
+      }
+    ],
+    "will_not_touch": [
+      {
+        "id": "no-all-mail",
+        "label": "Mailbox",
+        "status": "pass",
+        "detail": "No broad mailbox access."
+      },
+      {
+        "id": "no-sharepoint-crawl",
+        "label": "SharePoint",
+        "status": "pass",
+        "detail": "No drive-wide crawl."
+      },
+      {
+        "id": "no-crm-write",
+        "label": "CRM",
+        "status": "pass",
+        "detail": "No CRM write in this workflow."
+      }
+    ],
+    "external_actions": [
+      {
+        "id": "outlook-send",
+        "label": "Outlook send",
+        "status": "pending",
+        "detail": "Approval required before send."
+      },
+      {
+        "id": "shared-save",
+        "label": "Shared-location save",
+        "status": "pending",
+        "detail": "Approval required before save."
+      }
+    ]
+  },
+  "policy_checks": [
+    {
+      "id": "model-policy",
+      "label": "Model allowed for synthetic/internal-model context",
+      "status": "pass",
+      "detail": "mock is in the manifest allowlist."
+    },
+    {
+      "id": "tool-policy",
+      "label": "Tools constrained to workflow",
+      "status": "pass",
+      "detail": "workbook_check, artifact_ops allowed for this run."
+    },
+    {
+      "id": "external-action-policy",
+      "label": "Human approval required",
+      "status": "pass",
+      "detail": "Send/save actions are pending approval."
+    },
+    {
+      "id": "memory-policy",
+      "label": "Rejected memory excluded",
+      "status": "pass",
+      "detail": "Candidate memory is shown to the user but not included in model context."
+    },
+    {
+      "id": "untrusted-content-policy",
+      "label": "Source documents are facts, not instructions",
+      "status": "pass",
+      "detail": "Workflow treats source context as evidence only."
+    }
+  ],
+  "entitlement_ledger": [
+    {
+      "source_id": "wb:Model_v12.xlsx#Revenue Build!F87",
+      "source_label": "Revenue Build - cell F87",
+      "provider": "workbook",
+      "as_of": "2026-06-19T08:14:00Z",
+      "may_retrieve": true,
+      "may_quote": true,
+      "may_summarize": true,
+      "may_cache": false,
+      "may_redistribute": false,
+      "may_enter_model_context": true,
+      "detail": "Synthetic workbook context selected by user; not redistributable outside this demo."
+    },
+    {
+      "source_id": "wb:Model_v12.xlsx#Debt Schedule!D40",
+      "source_label": "Debt Schedule - cell D40",
+      "provider": "workbook",
+      "as_of": "2026-06-19T08:14:00Z",
+      "may_retrieve": true,
+      "may_quote": true,
+      "may_summarize": true,
+      "may_cache": false,
+      "may_redistribute": false,
+      "may_enter_model_context": true,
+      "detail": "Synthetic workbook context selected by user; not redistributable outside this demo."
+    },
+    {
+      "source_id": "src.synthetic.quote.2026-06-19",
+      "source_label": "Approved market-data quote - 2026-06-19 08:14Z",
+      "provider": "approved-market-data",
+      "as_of": "2026-06-19T08:14:00Z",
+      "may_retrieve": true,
+      "may_quote": false,
+      "may_summarize": true,
+      "may_cache": false,
+      "may_redistribute": false,
+      "may_enter_model_context": true,
+      "detail": "Synthetic approved-data source; summary use only, no redistribution."
+    }
+  ],
+  "artifact_preview": {
+    "target": "word-section",
+    "title": "Weekly Investment Update",
+    "blocked": false,
+    "sections": [
+      {
+        "id": "topline",
+        "heading": "Topline and leverage",
+        "body": "Topline reached $48.2M in FY24, up 21% YoY. Net leverage held at 3.1x.",
+        "source_ids": [
+          "wb:Model_v12.xlsx#Revenue Build!F87",
+          "wb:Model_v12.xlsx#Debt Schedule!D40"
+        ]
+      },
+      {
+        "id": "assumption-review",
+        "heading": "Assumption requiring review",
+        "body": "The base case assumes 4.0% churn, changed from 3.2%; confirm with the deal team before distribution.",
+        "source_ids": [
+          "wb:Model_v12.xlsx#Revenue Build!F87",
+          "wb:Model_v12.xlsx#Debt Schedule!D40"
+        ]
+      },
+      {
+        "id": "open-items",
+        "heading": "Open review items",
+        "body": "Confirm churn assumption change, then approve the Outlook draft or shared-folder save.",
+        "source_ids": []
+      }
+    ],
+    "citations": [
+      {
+        "id": "wb:Model_v12.xlsx#Revenue Build!F87",
+        "provider": "workbook",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Revenue Build - cell F87"
+      },
+      {
+        "id": "wb:Model_v12.xlsx#Debt Schedule!D40",
+        "provider": "workbook",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Debt Schedule - cell D40"
+      }
+    ],
+    "review_flags": [
+      "churn_changed"
+    ]
+  },
+  "redlines": [
+    {
+      "id": "redline.churn",
+      "label": "Assumption changed",
+      "before": "Churn assumption 3.2%",
+      "after": "Churn assumption 4.0%",
+      "action": "accept",
+      "status": "proposed"
+    },
+    {
+      "id": "redline.memory",
+      "label": "Candidate memory rejected",
+      "before": "Use a more promotional tone when discussing portfolio company performance.",
+      "after": "Excluded from model context until user approves it.",
+      "action": "reject",
+      "status": "rejected"
+    }
+  ],
+  "verification_checks": [
+    {
+      "id": "citation-coverage",
+      "label": "Citation coverage",
+      "status": "pass",
+      "detail": "Every material figure in the draft has a source ref."
+    },
+    {
+      "id": "numeric-trace",
+      "label": "Numerical traceability",
+      "status": "pass",
+      "detail": "Revenue and leverage tie to workbook cells."
+    },
+    {
+      "id": "stale-source",
+      "label": "Stale source check",
+      "status": "pass",
+      "detail": "Synthetic sources share the same as-of timestamp."
+    },
+    {
+      "id": "unsupported-claim",
+      "label": "Unsupported claim guard",
+      "status": "pass",
+      "detail": "Draft is constrained to selected context and open items."
+    }
+  ],
+  "approvals": [
+    {
+      "id": "reviewer",
+      "label": "Reviewer approval",
+      "status": "pending",
+      "detail": "Required before this leaves draft state."
+    },
+    {
+      "id": "external-send-save",
+      "label": "Send/save approval",
+      "status": "pending",
+      "detail": "No external action performed."
+    }
+  ],
+  "run_history": {
+    "id": "run.weekly_update.synthetic",
+    "ts": "2026-06-20T03:55:18.082Z",
+    "model": {
+      "id": "mock",
+      "routing_reason": "deterministic test provider for synthetic run",
+      "deployment": "local"
+    },
+    "skill": {
+      "id": "skill.weekly_update",
+      "version": "0.1.0"
+    },
+    "sources": [
+      {
+        "id": "wb:Model_v12.xlsx#Revenue Build!F87",
+        "provider": "workbook",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Revenue Build - cell F87"
+      },
+      {
+        "id": "wb:Model_v12.xlsx#Debt Schedule!D40",
+        "provider": "workbook",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Debt Schedule - cell D40"
+      },
+      {
+        "id": "src.synthetic.quote.2026-06-19",
+        "provider": "approved-market-data",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Approved market-data quote - 2026-06-19 08:14Z"
+      }
+    ],
+    "approved_memory_ids": [
+      "mem.weekly_style"
+    ],
+    "audit_event_ids": [
+      "audit.678d127d9c8a",
+      "audit.b53cca5e596a",
+      "audit.c6f195ab0cd6",
+      "audit.7a4ddde7e403",
+      "audit.3fcdfe40c442",
+      "audit.dbd8334e5e12"
+    ],
+    "approval_status": "pending",
+    "searchable_terms": [
+      "weekly update",
+      "Model_v12.xlsx",
+      "skill.weekly_update",
+      "mock"
+    ]
+  }
+}

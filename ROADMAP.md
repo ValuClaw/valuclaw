@@ -58,10 +58,12 @@ These are direction, not dates. They should be pulled only when they strengthen 
 
 ## v0.5 — Demo-grade workflow surface
 
-- [ ] Export the synthetic weekly-update run as a browser-demo state machine
-- [ ] Show model choice, skill version, selected context, approved data, memory, output, sources, approvals, and history
-- [ ] Keep all data synthetic/public and avoid live customer/vendor access
-- [ ] Make the demo useful to a skeptical capital-markets professional, not just a developer inspecting architecture
+- [x] Export the synthetic weekly-update run as a browser-demo payload
+- [x] Show model choice, skill version, selected context, approved data, memory, output, sources, approvals, and history
+- [x] Add customer-readiness primitives: workflow map, permission preview, policy checks, entitlement ledger, redline/undo metadata, verification checks, approval state, and run history
+- [x] Add tests proving synthetic-only data, blocked workbook behavior, rejected-memory exclusion, citation coverage, and entitlement metadata
+- [x] Keep all data synthetic/public and avoid live customer/vendor access
+- [x] Make the demo useful to a skeptical capital-markets professional, not just a developer inspecting architecture
 
 ## v0.6 — Microsoft identity + surface bridge
 

@@ -76,6 +76,17 @@ The package is intentionally fixture-driven until a design partner names a real 
 - `skills/model-audit/SKILL.md` is the second example skill.
 - `packages/evals` checks the synthetic weekly-update workflow for citation coverage and blocking when the workbook is excluded.
 
+## Website demo payload
+
+The public website demo is backed by a generated synthetic payload from this repo:
+
+```bash
+pnpm build
+pnpm demo:payload
+```
+
+This writes `artifacts/demo/weekly-update-demo.json`, including workflow mapping, context and permission preview, policy checks, entitlement ledger, Office artifact preview, redlines, verification checks, approvals, and run history. It is synthetic-only and safe to copy into the website repo.
+
 ## Office add-in dev surface
 
 `packages/office-addin` contains the first Word task-pane surface:

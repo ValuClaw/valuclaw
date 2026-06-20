@@ -1,5 +1,6 @@
 export * from "./approval.js";
 export * from "./audit-log.js";
+export * from "./demo-payload.js";
 export * from "./history-store.js";
 export * from "./manifest.js";
 export * from "./memory-store.js";
