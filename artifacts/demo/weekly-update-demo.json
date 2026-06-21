@@ -3,7 +3,7 @@
   "generated_by": "ValuClaw open-core",
   "fixture_id": "fixtures/weekly-update/input.json",
   "synthetic_only": true,
-  "open_core_commit": "b35e98b-dirty",
+  "open_core_commit": "259dfe6-dirty",
   "workflow": {
     "id": "workflow.weekly_investment_update",
     "title": "Weekly investment update",
@@ -215,6 +215,19 @@
       "detail": "Synthetic workbook context selected by user; not redistributable outside this demo."
     },
     {
+      "source_id": "wb:Model_v12.xlsx#Assumptions!C19",
+      "source_label": "Assumptions - cell C19",
+      "provider": "workbook",
+      "as_of": "2026-06-19T08:14:00Z",
+      "may_retrieve": true,
+      "may_quote": true,
+      "may_summarize": true,
+      "may_cache": false,
+      "may_redistribute": false,
+      "may_enter_model_context": true,
+      "detail": "Synthetic workbook context selected by user; not redistributable outside this demo."
+    },
+    {
       "source_id": "src.synthetic.quote.2026-06-19",
       "source_label": "Approved market-data quote - 2026-06-19 08:14Z",
       "provider": "approved-market-data",
@@ -247,8 +260,7 @@
         "heading": "Assumption requiring review",
         "body": "The base case assumes 4.0% churn, changed from 3.2%; confirm with the deal team before distribution.",
         "source_ids": [
-          "wb:Model_v12.xlsx#Revenue Build!F87",
-          "wb:Model_v12.xlsx#Debt Schedule!D40"
+          "wb:Model_v12.xlsx#Assumptions!C19"
         ]
       },
       {
@@ -270,6 +282,12 @@
         "provider": "workbook",
         "as_of": "2026-06-19T08:14:00Z",
         "citation": "Debt Schedule - cell D40"
+      },
+      {
+        "id": "wb:Model_v12.xlsx#Assumptions!C19",
+        "provider": "workbook",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Assumptions - cell C19"
       }
     ],
     "review_flags": [
@@ -305,7 +323,7 @@
       "id": "numeric-trace",
       "label": "Numerical traceability",
       "status": "pass",
-      "detail": "Revenue and leverage tie to workbook cells."
+      "detail": "Revenue, leverage, and churn tie to workbook cells."
     },
     {
       "id": "stale-source",
@@ -336,7 +354,7 @@
   ],
   "run_history": {
     "id": "run.weekly_update.synthetic",
-    "ts": "2026-06-20T03:55:18.082Z",
+    "ts": "2026-06-21T11:39:07.782Z",
     "model": {
       "id": "mock",
       "routing_reason": "deterministic test provider for synthetic run",
@@ -360,6 +378,12 @@
         "citation": "Debt Schedule - cell D40"
       },
       {
+        "id": "wb:Model_v12.xlsx#Assumptions!C19",
+        "provider": "workbook",
+        "as_of": "2026-06-19T08:14:00Z",
+        "citation": "Assumptions - cell C19"
+      },
+      {
         "id": "src.synthetic.quote.2026-06-19",
         "provider": "approved-market-data",
         "as_of": "2026-06-19T08:14:00Z",
@@ -370,12 +394,12 @@
       "mem.weekly_style"
     ],
     "audit_event_ids": [
-      "audit.678d127d9c8a",
-      "audit.b53cca5e596a",
-      "audit.c6f195ab0cd6",
-      "audit.7a4ddde7e403",
-      "audit.3fcdfe40c442",
-      "audit.dbd8334e5e12"
+      "audit.5d6809c0e6c8",
+      "audit.5022f16d5b73",
+      "audit.549cf1ad294d",
+      "audit.477ea99afdbd",
+      "audit.abc168f2d361",
+      "audit.32668c215d27"
     ],
     "approval_status": "pending",
     "searchable_terms": [
