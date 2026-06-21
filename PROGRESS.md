@@ -4,7 +4,7 @@ A running log for the build loop. Keep it short and current. See [`AGENTS.md`](A
 
 ## Current milestone
 
-Roadmap complete through v0.5. Open-core exports a synthetic weekly-update payload for the website demo, with customer-readiness primitives surfaced explicitly.
+Roadmap complete through v0.5. Open-core exports a synthetic weekly-update payload for the website demo, with customer-readiness primitives surfaced explicitly. The next gate is commercial proof for one model-to-memo or diligence-note workflow, not broader platform construction.
 
 ## Done
 
@@ -46,11 +46,12 @@ Roadmap complete through v0.5. Open-core exports a synthetic weekly-update paylo
 
 ## Next
 
+- Run the `ROADMAP.md` discovery gate: 10–15 workflow interviews with boutique investment banks and lean private-market teams; test model-to-memo and diligence note before expanding surface or connector scope.
+- For the candidate workflow, define the reviewer, selected inputs, source/data policy, model policy, artifact destination, approval gate, and baseline measures before writing live integrations.
 - Keep the website demo and generated open-core payload in sync.
 - Human-verify the Office add-in sideload flow in Word dev mode.
-- Add a mocked Microsoft Graph/Entra adapter interface and admin packet before touching live Microsoft accounts.
-- Harden provider-contract runtime validation and add OpenBB-compatible response normalization using synthetic/public data only.
-- Keep hardening the open core with real design-partner workflows, but do not add real customer data or licensed vendor data.
+- Add a mocked Microsoft Graph/Entra adapter interface, admin packet, provider-contract runtime validation, or OpenBB-compatible normalization only when the selected design-partner workflow requires it.
+- Keep real customer data, credentials, and licensed vendor material out of the repo.
 
 ## Decisions / notes
 

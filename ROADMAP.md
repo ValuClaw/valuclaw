@@ -65,6 +65,18 @@ These are direction, not dates. They should be pulled only when they strengthen 
 - [x] Keep all data synthetic/public and avoid live customer/vendor access
 - [x] Make the demo useful to a skeptical capital-markets professional, not just a developer inspecting architecture
 
+## Discovery gate — before broad technical expansion
+
+This is an **operator-owned** gate, not a prompt for the coding agent to simulate outreach. The next valuable work is commercial proof for one workflow, not a larger platform.
+
+- Focus first discovery and website outreach on **10–150 person boutique investment banks and lean private-market teams** (PE, private credit, independent sponsors); treat family offices as an early secondary audience.
+- Test **model-to-memo** and **diligence note** as the first artifact wedge. Pick the one with a clear reviewer, known inputs, low data-rights friction, and the fastest credible "I need this" response.
+- Run 10–15 workflow interviews and secure 1–3 design-partner sprints before broadening surfaces, connector coverage, or an enterprise control plane.
+- For every candidate workflow, record the baseline and pilot measurements: time to first draft, citation/source coverage, unsupported-claim rate, reviewer edits, and review time.
+- Define the pilot boundary in writing: selected Microsoft/data inputs, model policy, artifact destination, human approval point, data retention, and deployment owner.
+
+The implementation milestones below remain necessary. Pull them only when they directly unblock the selected design-partner workflow.
+
 ## v0.6 — Microsoft identity + surface bridge
 
 - [ ] Document Microsoft Entra app registration and narrow delegated-scope ladder
