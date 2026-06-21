@@ -6,7 +6,7 @@ This is the smallest useful deployment of ValuClaw on one Mac: a local harness, 
 
 - The Word task pane is served from `https://localhost:3100`.
 - Run manifests, artifacts, audit logs, memory exports, and history stay in `.valuclaw/` inside this checkout by default.
-- The selected synthetic context is sent to OpenRouter. Start on Auto or choose GPT-5.4 Mini, Claude Opus 4.8, Claude Sonnet 4.6, Gemini 3.5 Flash, or DeepSeek V4 Flash. The returned run records both the selected route and the model OpenRouter resolved.
+- The selected synthetic context is sent to OpenRouter. Start on Auto or choose GPT-5.5, Claude Opus 4.8, Claude Sonnet 4.6, Gemini 3.5 Flash, or DeepSeek V4 Flash. The returned run records both the selected route and the model OpenRouter resolved.
 - `OPENROUTER_API_KEY` is read only by the local bridge process. It is never sent to Word, written to a run artifact, or committed to the repository.
 
 ## One-time setup

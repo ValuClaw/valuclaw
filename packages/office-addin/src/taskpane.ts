@@ -2,7 +2,7 @@ import { getOffice } from "./office-shim.js";
 
 const MODEL_ROSTER_KEY = "valuclaw.openrouter-model-roster";
 const DEFAULT_MODEL_ROSTER = [
-  "openai/gpt-5.4-mini",
+  "openai/gpt-5.5",
   "anthropic/claude-opus-4.8",
   "anthropic/claude-sonnet-4.6",
   "google/gemini-3.5-flash",
