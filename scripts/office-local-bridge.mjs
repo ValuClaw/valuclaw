@@ -140,7 +140,8 @@ function modelRoute(modelId, suppliedRoster) {
           allowed_models: roster,
           cost_quality_tradeoff: 6
         }
-      ]
+      ],
+      reasoning: { effort: "none" }
     }
   };
 }
@@ -160,7 +161,7 @@ function pinnedModelRoute(id) {
     id,
     reason: `The user pinned ${id} for this workflow run.`,
     destination: `OpenRouter; ${id} is recorded with this run.`,
-    requestExtras: undefined
+    requestExtras: { reasoning: { effort: "none" } }
   };
 }
 
