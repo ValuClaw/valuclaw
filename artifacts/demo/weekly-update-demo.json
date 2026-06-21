@@ -3,7 +3,7 @@
   "generated_by": "ValuClaw open-core",
   "fixture_id": "fixtures/weekly-update/input.json",
   "synthetic_only": true,
-  "open_core_commit": "259dfe6-dirty",
+  "open_core_commit": "e124fb1",
   "workflow": {
     "id": "workflow.weekly_investment_update",
     "title": "Weekly investment update",
@@ -354,7 +354,7 @@
   ],
   "run_history": {
     "id": "run.weekly_update.synthetic",
-    "ts": "2026-06-21T11:39:07.782Z",
+    "ts": "2026-06-21T11:40:09.466Z",
     "model": {
       "id": "mock",
       "routing_reason": "deterministic test provider for synthetic run",
@@ -394,12 +394,12 @@
       "mem.weekly_style"
     ],
     "audit_event_ids": [
-      "audit.5d6809c0e6c8",
-      "audit.5022f16d5b73",
-      "audit.549cf1ad294d",
-      "audit.477ea99afdbd",
-      "audit.abc168f2d361",
-      "audit.32668c215d27"
+      "audit.d305cfadc8f0",
+      "audit.243774cbc210",
+      "audit.3263ada72274",
+      "audit.04d706a6f21b",
+      "audit.6664861374b4",
+      "audit.86d0b6fd0034"
     ],
     "approval_status": "pending",
     "searchable_terms": [
