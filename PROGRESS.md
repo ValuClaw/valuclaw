@@ -29,7 +29,7 @@ Roadmap complete through v0.5. Open-core exports a synthetic weekly-update paylo
 - v0.3 — Office add-in native surface:
   - Word task-pane `manifest.xml`;
   - Office.js task pane backed by the same local harness as the CLI;
-  - HTTPS localhost bridge with deterministic synthetic and explicit OpenAI-compatible local-model paths;
+  - HTTPS localhost bridge using Auto plus a locally saved roster of up to five OpenRouter model IDs for a bounded synthetic workflow, with selected and resolved models recorded in the run;
   - Word insertion path via `Office.context.document.setSelectedDataAsync`;
   - visible lineage, approval state, and preserved history;
   - build copies task-pane assets into `dist`.

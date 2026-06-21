@@ -13,6 +13,8 @@ export function weeklyUpdateDemoPayload(options: WeeklyUpdateDemoPayloadOptions)
   const rejectedMemory = result.memory.filter((item) => !item.approved);
   const workbookSources = result.manifest.sources?.filter((source) => source.provider === "workbook") ?? [];
   const marketSources = result.manifest.sources?.filter((source) => source.provider !== "workbook") ?? [];
+  const toplineSources = workbookSources.filter((source) => source.id.includes("Revenue Build") || source.id.includes("Debt Schedule"));
+  const churnSources = workbookSources.filter((source) => source.id.includes("Assumptions"));
   const blocked = result.artifact.blocked;
 
   return {
@@ -120,13 +122,13 @@ export function weeklyUpdateDemoPayload(options: WeeklyUpdateDemoPayloadOptions)
               id: "topline",
               heading: "Topline and leverage",
               body: `Topline reached ${input.workbook?.revenue_fy24} in FY24, up ${input.workbook?.revenue_yoy} YoY. Net leverage held at ${input.workbook?.leverage}.`,
-              source_ids: workbookSources.map((source) => source.id)
+              source_ids: toplineSources.map((source) => source.id)
             },
             {
               id: "assumption-review",
               heading: "Assumption requiring review",
               body: `The base case assumes ${input.workbook?.churn_current} churn, changed from ${input.workbook?.churn_prior}; confirm with the deal team before distribution.`,
-              source_ids: workbookSources.map((source) => source.id)
+              source_ids: churnSources.map((source) => source.id)
             },
             {
               id: "open-items",
@@ -158,7 +160,7 @@ export function weeklyUpdateDemoPayload(options: WeeklyUpdateDemoPayloadOptions)
     ],
     verification_checks: [
       item("citation-coverage", "Citation coverage", blocked ? "blocked" : "pass", blocked ? "No material claims drafted." : "Every material figure in the draft has a source ref."),
-      item("numeric-trace", "Numerical traceability", blocked ? "blocked" : "pass", blocked ? "Workbook excluded." : "Revenue and leverage tie to workbook cells."),
+      item("numeric-trace", "Numerical traceability", blocked ? "blocked" : "pass", blocked ? "Workbook excluded." : "Revenue, leverage, and churn tie to workbook cells."),
       item("stale-source", "Stale source check", "pass", "Synthetic sources share the same as-of timestamp."),
       item("unsupported-claim", "Unsupported claim guard", "pass", "Draft is constrained to selected context and open items.")
     ],

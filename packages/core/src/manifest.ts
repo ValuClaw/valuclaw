@@ -29,6 +29,12 @@ export function assembleWeeklyUpdateManifest(input: WeeklyUpdateInput, skill: Sk
       as_of: input.workbook.as_of,
       citation: "Debt Schedule - cell D40"
     });
+    sources.push({
+      id: `wb:${input.workbook.id}#Assumptions!C19`,
+      provider: "workbook",
+      as_of: input.workbook.as_of,
+      citation: "Assumptions - cell C19"
+    });
     dataClasses.add("internal-model");
   } else {
     excluded.push({

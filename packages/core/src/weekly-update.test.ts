@@ -24,6 +24,7 @@ describe("v0.1 weekly update harness", () => {
     const manifest = assembleWeeklyUpdateManifest(input, skill);
     expect(manifest.skill).toEqual({ id: "skill.weekly_update", version: "0.1.0" });
     expect(manifest.sources?.some((source) => source.provider === "workbook")).toBe(true);
+    expect(manifest.sources?.some((source) => source.id.includes("Assumptions!C19"))).toBe(true);
     expect(manifest.memory?.[0]?.id).toBe("mem.weekly_style");
   });
 
@@ -36,6 +37,7 @@ describe("v0.1 weekly update harness", () => {
     expect(await readFile(join(outDir, "artifact.md"), "utf8")).toContain("Weekly Investment Update");
     expect(await readFile(join(outDir, "context-manifest.json"), "utf8")).toContain("skill.weekly_update");
     expect(await readFile(join(outDir, "audit.ndjson"), "utf8")).toContain("\"type\":\"approval\"");
+    expect(result.artifact.citations.map((citation) => citation.id)).toContain("wb:Model_v12.xlsx#Assumptions!C19");
   });
 
   it("blocks model commentary when workbook context is excluded", async () => {
@@ -56,7 +58,7 @@ describe("v0.1 weekly update harness", () => {
       },
       provider: {
         id: "local:qwen3:4b-instruct",
-        complete: async () => "A source-backed local-model draft."
+        complete: async () => ({ text: "A source-backed local-model draft." })
       }
     });
     expect(result.manifest.model).toEqual({
@@ -65,6 +67,7 @@ describe("v0.1 weekly update harness", () => {
       deployment: "local"
     });
     expect(result.auditEvents.find((event) => event.type === "model_call")?.model?.id).toBe("qwen3:4b-instruct");
+    expect(result.modelExecution).toMatchObject({ providerId: "local:qwen3:4b-instruct", requestedModelId: "qwen3:4b-instruct" });
   });
 
   it("keeps transparent memory editable and exportable outside skills", async () => {

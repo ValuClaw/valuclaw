@@ -37,6 +37,8 @@
         font-size: 13px;
       }
       select,
+      input,
+      textarea,
       button {
         width: 100%;
         min-height: 36px;
@@ -44,6 +46,27 @@
         border: 1px solid #d9e1ec;
         background: white;
         font: inherit;
+      }
+      textarea {
+        box-sizing: border-box;
+        min-height: 112px;
+        padding: 8px;
+        resize: vertical;
+      }
+      details {
+        margin-top: 10px;
+      }
+      summary {
+        cursor: pointer;
+        color: #0f6cbd;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .secondary {
+        margin-top: 8px;
+        border-color: #d9e1ec;
+        background: white;
+        color: #0f6cbd;
       }
       button {
         border-color: #0f6cbd;
@@ -82,12 +105,20 @@
       <fieldset>
         <legend>Run setup</legend>
         <label>
-          Model
-          <select id="model">
-            <option value="mock">Deterministic synthetic run</option>
-            <option value="local">Configured local model</option>
+          Model route
+          <select id="model-route" aria-label="Model route">
+            <option value="auto">Auto</option>
           </select>
         </label>
+        <details>
+          <summary>Model roster</summary>
+          <label>
+            OpenRouter model IDs, one per line (up to five)
+            <textarea id="model-options" aria-label="OpenRouter model roster"></textarea>
+          </label>
+          <button id="save-model-options" class="secondary" type="button">Save model roster</button>
+          <p id="model-options-status" class="muted"></p>
+        </details>
         <label>
           Skill
           <select id="skill">

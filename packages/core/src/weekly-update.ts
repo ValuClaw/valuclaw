@@ -61,7 +61,8 @@ export async function runWeeklyUpdate(options: WeeklyUpdateRunOptions): Promise<
   }
 
   const provider = options.provider ?? new MockModelProvider();
-  const modelText = await provider.complete({ manifest, input });
+  const completion = await provider.complete({ manifest, input });
+  const modelText = completion.text;
   auditEvents.push(
     auditEvent({
       actor: input.actor,
@@ -70,7 +71,12 @@ export async function runWeeklyUpdate(options: WeeklyUpdateRunOptions): Promise<
       purpose: "Draft weekly update from explicit context manifest.",
       model: manifest.model,
       inputs: manifest,
-      sources: manifest.sources
+      sources: manifest.sources,
+      result: {
+        provider_id: provider.id,
+        requested_model_id: manifest.model.id,
+        resolved_model_id: completion.resolvedModelId
+      }
     })
   );
 
@@ -100,7 +106,12 @@ export async function runWeeklyUpdate(options: WeeklyUpdateRunOptions): Promise<
     manifest,
     artifact,
     auditEvents,
-    memory: input.memory ?? []
+    memory: input.memory ?? [],
+    modelExecution: {
+      providerId: provider.id,
+      requestedModelId: manifest.model.id,
+      resolvedModelId: completion.resolvedModelId
+    }
   };
   if (options.outDir) {
     await writeRunOutput(options.outDir, result);

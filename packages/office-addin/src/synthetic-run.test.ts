@@ -17,7 +17,11 @@ describe("office add-in local bridge contract", () => {
 
   it("uses the local harness API rather than a browser-only synthetic stand-in", async () => {
     const taskpane = await readFile("packages/office-addin/src/taskpane.ts", "utf8");
+    const html = await readFile("packages/office-addin/public/taskpane.html", "utf8");
     expect(taskpane).toContain('fetch("/api/runs/weekly-update"');
     expect(taskpane).not.toContain("createSyntheticRun");
+    expect(taskpane).toContain("modelRoster: readModelRoster()");
+    expect(html).toContain('id="model-options"');
+    expect(html).toContain('id="save-model-options"');
   });
 });

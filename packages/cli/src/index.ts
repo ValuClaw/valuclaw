@@ -3,7 +3,7 @@ import { execFile } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { promisify } from "node:util";
-import { LocalOpenAICompatibleProvider, readWeeklyUpdateInput, runWeeklyUpdate, weeklyUpdateDemoPayload } from "@valuclaw/core";
+import { OpenAICompatibleProvider, readWeeklyUpdateInput, runWeeklyUpdate, weeklyUpdateDemoPayload } from "@valuclaw/core";
 
 const execFileAsync = promisify(execFile);
 
@@ -134,7 +134,7 @@ function localProviderFromArgs(args: Args) {
   const apiKeyEnv = args.apiKeyEnv ?? "VALUCLAW_MODEL_API_KEY";
   const maxTokens = args.maxTokens ?? environmentPositiveInteger("VALUCLAW_MODEL_MAX_TOKENS");
   return {
-    provider: new LocalOpenAICompatibleProvider({
+    provider: new OpenAICompatibleProvider({
       baseUrl,
       model,
       apiKey: process.env[apiKeyEnv],

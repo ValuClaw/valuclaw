@@ -20,6 +20,7 @@ describe("weekly update demo payload", () => {
     expect(payload.permission_preview.will_not_touch.map((item) => item.id)).toContain("no-all-mail");
     expect(payload.policy_checks.find((item) => item.id === "memory-policy")?.status).toBe("pass");
     expect(payload.artifact_preview.sections[0].source_ids.length).toBeGreaterThan(0);
+    expect(payload.artifact_preview.sections.find((section) => section.id === "assumption-review")?.source_ids).toEqual(["wb:Model_v12.xlsx#Assumptions!C19"]);
   });
 
   it("keeps rejected memory visible but out of model context", async () => {

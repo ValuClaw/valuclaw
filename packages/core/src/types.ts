@@ -128,6 +128,11 @@ export interface WeeklyUpdateRunResult {
   artifact: Artifact;
   auditEvents: AuditEvent[];
   memory: MemoryRecord[];
+  modelExecution: {
+    providerId: string;
+    requestedModelId: string;
+    resolvedModelId?: string;
+  };
 }
 
 export interface RunHistoryEntry {

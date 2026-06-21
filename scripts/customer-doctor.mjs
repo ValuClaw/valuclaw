@@ -19,7 +19,7 @@ const checks = [
   ["Microsoft Word", await exists(wordPath), wordPath],
   ["Localhost certificate files", await exists(join(certificateRoot, "localhost.crt")) && await exists(join(certificateRoot, "localhost.key")), certificateRoot],
   ["Word sideload manifest", await exists(wordManifestPath), wordManifestPath],
-  ["Local model configured", Boolean(process.env.VALUCLAW_MODEL), process.env.VALUCLAW_MODEL ?? "optional; deterministic demo remains available"]
+  ["OpenRouter key configured", Boolean(process.env.OPENROUTER_API_KEY), process.env.OPENROUTER_API_KEY ? "server-side key available" : "set OPENROUTER_API_KEY before starting the bridge"]
 ];
 
 for (const [name, ready, detail] of checks) {
@@ -29,7 +29,7 @@ for (const [name, ready, detail] of checks) {
 process.stdout.write("\nNext steps:\n");
 process.stdout.write("  1. pnpm office:cert       # one-time trusted localhost certificate\n");
 process.stdout.write("  2. pnpm office:sideload:word\n");
-process.stdout.write("  3. pnpm office:serve\n");
+process.stdout.write("  3. export OPENROUTER_API_KEY='...'; pnpm office:serve\n");
 process.stdout.write("  4. Restart Word, open a document, then Home > Add-ins > ValuClaw.\n");
 
 async function exists(path) {

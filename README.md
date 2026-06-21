@@ -96,7 +96,7 @@ This writes `artifacts/demo/weekly-update-demo.json`, including workflow mapping
 - `manifest.xml` for Office dev sideloading;
 - `public/taskpane.html` and `src/taskpane.ts` for the task pane;
 - a local HTTPS bridge into the same harness used by the CLI;
-- explicit controls for deterministic synthetic mode or a configured OpenAI-compatible local model;
+- Auto plus a locally saved roster of up to five OpenRouter model IDs for the Word proof, with the selected and resolved model recorded per run;
 - visible approval state, lineage, and preserved run history;
 - insertion into Word through `Office.context.document.setSelectedDataAsync` when Office.js is available.
 
@@ -108,7 +108,7 @@ pnpm office:sideload:word
 pnpm office:serve
 ```
 
-Then restart Word, open a document, and choose **Home > Add-ins > ValuClaw**. This local proof uses synthetic data only by default. For a local model, set `VALUCLAW_MODEL` and `VALUCLAW_MODEL_BASE_URL` before starting the bridge; the pane displays the selected model endpoint. See [`docs/local-customer-setup.md`](docs/local-customer-setup.md) for the exact data boundary and rollout limits.
+Set `OPENROUTER_API_KEY` before `pnpm office:serve`, then restart Word, open a document, and choose **Home > Add-ins > ValuClaw**. This local proof sends synthetic data only through OpenRouter. Start on Auto or choose GPT, Opus, Sonnet, Gemini, or DeepSeek; every run records the selected and resolved model. See [`docs/local-customer-setup.md`](docs/local-customer-setup.md) for the exact data boundary and rollout limits.
 
 ## For Microsoft 365 administrators and security teams
 

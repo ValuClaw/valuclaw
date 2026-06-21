@@ -17,7 +17,9 @@ Illustrative only. No real data. This shows how the rails fit together for one r
   "skill": { "id": "skill.weekly_update", "version": "0.1.0" },
   "memory": [{ "id": "mem.weekly_style", "scope": "weekly-update" }],
   "sources": [
-    { "id": "wb:Model_v12.xlsx#Revenue Build!F87", "provider": "workbook", "as_of": "2026-06-19T08:14:00Z", "citation": "Revenue Build · cell F87" }
+    { "id": "wb:Model_v12.xlsx#Revenue Build!F87", "provider": "workbook", "as_of": "2026-06-19T08:14:00Z", "citation": "Revenue Build · cell F87" },
+    { "id": "wb:Model_v12.xlsx#Debt Schedule!D40", "provider": "workbook", "as_of": "2026-06-19T08:14:00Z", "citation": "Debt Schedule · cell D40" },
+    { "id": "wb:Model_v12.xlsx#Assumptions!C19", "provider": "workbook", "as_of": "2026-06-19T08:14:00Z", "citation": "Assumptions · cell C19" }
   ],
   "tools": ["workbook_check"],
   "data_classes": ["internal-model", "approved-market-data"],
